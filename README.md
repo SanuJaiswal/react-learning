@@ -1,12 +1,12 @@
 # Here Is React For U
 
-**_npm(Manage packages)_** - Standard repo for all the packages.
-**_bundler_(webpack, vite, parcel)** - bundles the app to be shipped to prod
-**_package.json_** - configuration for npm
-**_package-lock.json_** - track the excat version of all the transitive dependencies our project needs
-**node_modules** - contains the code of all the dependencies installed
-**_npx_** - Executing the bundler
-**_Babel_** - Transpiles JSX to React.createElement(JS Engine understandable language)
+**_npm(Manage packages)_** - Standard repo for all the packages.<br />
+**_bundler_(webpack, vite, parcel)** - bundles the app to be shipped to prod<br />
+**_package.json_** - configuration for npm<br />
+**_package-lock.json_** - track the excat version of all the transitive dependencies our project needs<br />
+**node_modules** - contains the code of all the dependencies installed<br />
+**_npx_** - Executing the bundler<br />
+**_Babel_** - Transpiles JSX to React.createElement(JS Engine understandable language)<br />
 
 1. npm init
    -> creates **package.json**
@@ -15,7 +15,7 @@
 2. npm install -D parcel
    -> dependency added in package.json +
    creates **package-lock.json** +
-   creates **node_modules**
+   creates **node_modules**<br />
    npm install -> creates **node_modules** if not there
 
 3. npm install react
@@ -23,8 +23,8 @@
 4. npm install react-dom
 
 5. npx parcel index.html
-   -> parcel has hosted our app in server, like : http://localhost:1234
-   For prod - npx parcel build index.html and delete main in package.json
+   -> parcel has hosted our app in server, like : http://localhost:1234<br />
+   For prod - npx parcel build index.html and delete main in package.json<br />
    -> Add the command in scripts in package.json using
    **npm run start** OR **npm start** for dev
    **npm run build** for prod
