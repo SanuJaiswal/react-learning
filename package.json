@@ -2,10 +2,9 @@
   "name": "react-learning",
   "version": "1.0.0",
   "description": "React For U",
-  "main": "App.js",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build inde4x.html",
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "repository": {
