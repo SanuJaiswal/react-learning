@@ -4,12 +4,27 @@ import { Shimmer } from "./Shimmer";
 
 const Body = () => {
   const [originalData, setOriginalData] = useState([]);
-  const [listOfRestaurants, setListOfRestaurants] = useState([]);
+  const [filteredListOfRestaurants, setFilteredListOfRestaurants] = useState(
+    []
+  );
   const [isFiltered, setIsFiltered] = useState(false);
   const [filterButtonText, setFilterButtonText] = useState(
     "Show Top Rated Restaurants"
   );
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const debounce = (fn, delay) => {
+    let timerId;
+    return function (...args) {
+      if (timerId) {
+        clearTimeout(timerId);
+      }
+      timerId = setTimeout(() => {
+        fn(...args);
+      }, delay);
+    };
+  };
 
   const fetchData = async () => {
     try {
@@ -18,11 +33,11 @@ const Body = () => {
       );
       const jsonData = await response.json();
       setOriginalData(
-        jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        jsonData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
-      setListOfRestaurants(
-        jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+      setFilteredListOfRestaurants(
+        jsonData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
       setLoading(false);
@@ -35,14 +50,14 @@ const Body = () => {
     try {
       if (isFiltered) {
         // If already filtered, reset to the original data
-        setListOfRestaurants(originalData);
+        setFilteredListOfRestaurants(originalData);
         setFilterButtonText("Show Top Rated Restaurants");
       } else {
         // If not filtered, filter the data
-        const filteredResList = listOfRestaurants.filter(
+        const filteredResList = originalData.filter(
           (res) => res.info.avgRating > 4
         );
-        setListOfRestaurants(filteredResList);
+        setFilteredListOfRestaurants(filteredResList);
         setFilterButtonText("Show All Restaurants");
       }
 
@@ -52,30 +67,57 @@ const Body = () => {
     }
   };
 
+  const handleSearch = () => {
+    const searchedRestaurant = originalData.filter((res) =>
+      res.info.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredListOfRestaurants(searchedRestaurant);
+  };
+
+  const debouncedSearch = debounce(handleSearch, 300);
+
+  const handleInputSearch = (event) => {
+    const searchTermValue = event.target.value;
+    setSearchTerm(searchTermValue);
+    if (!searchTermValue) {
+      setFilteredListOfRestaurants(originalData);
+    } else {
+      debouncedSearch(searchTermValue);
+    }
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
     <div className="body">
-      {/* <div className="search">
-        <input type="text" id="searchBox" placeholder="Search your taste..." />
-        <button className="search-btn">Search</button>
-      </div> */}
-      <div className="filter">
-        <button
-          onClick={handleFilterClick}
-          className="filter-btn"
-          disabled={loading}
-        >
-          {filterButtonText}
-        </button>
+      <div className="options">
+        <div className="search">
+          <input
+            type="text"
+            id="searchBox"
+            placeholder={" Search your taste..."}
+            value={searchTerm}
+            onChange={handleInputSearch}
+          />
+        </div>
+        <div className="filter">
+          <button
+            onClick={handleFilterClick}
+            className="filter-btn"
+            disabled={loading}
+          >
+            {filterButtonText}
+          </button>
+        </div>
       </div>
+
       <div className="res-container">
         {loading ? (
           <Shimmer />
         ) : (
-          listOfRestaurants.map((res) => (
+          filteredListOfRestaurants.map((res) => (
             <RestaurantCard key={res.info.id} resData={res} />
           ))
         )}
