@@ -50,3 +50,7 @@
     const root = ReactDOM.createRoot(document.getElementById("root"));
     root.render(jsxHeading);
 ```
+
+debouncing,
+shimmer effect,
+lazing loading

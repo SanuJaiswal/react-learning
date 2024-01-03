@@ -1,5 +1,6 @@
 import { useState } from "react";
 import logo from "../utils/logo.jpg";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,6 +19,7 @@ const Header = () => {
     }
     setIsLoggedIn(!isLoggedIn);
   };
+
   return (
     <div className="header">
       <div className="logo-container">
@@ -31,9 +33,15 @@ const Header = () => {
       </div>
       <div className="nav-container">
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
+          <li>
+            <Link to="/home">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
           <li>Cart</li>
           <li className="login" onClick={handleLoginClick}>
             {logInText}

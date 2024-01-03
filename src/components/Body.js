@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import { Shimmer } from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [originalData, setOriginalData] = useState([]);
@@ -74,7 +75,7 @@ const Body = () => {
     setFilteredListOfRestaurants(searchedRestaurant);
   };
 
-  const debouncedSearch = debounce(handleSearch, 300);
+  const debouncedSearch = debounce(handleSearch, 800);
 
   const handleInputSearch = (event) => {
     const searchTermValue = event.target.value;
@@ -112,13 +113,14 @@ const Body = () => {
           </button>
         </div>
       </div>
-
       <div className="res-container">
         {loading ? (
           <Shimmer />
         ) : (
           filteredListOfRestaurants.map((res) => (
-            <RestaurantCard key={res.info.id} resData={res} />
+            <Link key={res.info.id} to={"/restaurants/" + res.info.id}>
+              <RestaurantCard resData={res} />
+            </Link>
           ))
         )}
       </div>
