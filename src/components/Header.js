@@ -23,13 +23,14 @@ const Header = () => {
   return (
     <div className="header">
       <div className="logo-container">
-        <img
-          className="logo"
-          title="Hungry Hunters"
-          src={logo}
-          alt="Hungry Hunters"
-          onClick={() => window.location.reload()}
-        />
+        <Link to="/">
+          <img
+            className="logo"
+            title="Hungry Hunters"
+            src={logo}
+            alt="Hungry Hunters"
+          />
+        </Link>
       </div>
       <div className="nav-container">
         <ul>

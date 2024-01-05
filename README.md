@@ -54,3 +54,16 @@
 debouncing,
 shimmer effect,
 lazing loading
+
+Functional Component -----------Class Component
+
+function returning JSX --> class with render method which returns JSX
+props as argument --> props taken in constructor(super call)
+props.attribute --> this.props.attribute
+hooks to manage state --> this.state= {stateName: value, ...} object with all states in constructor
+hooks to update state --> this.setState({stateName: updatedValue,.....})
+useEffect to make API calls --> componentDidUpdate()
+
+In Class Component
+-> render phase(constructor -> render) then commit phase (DOM updation -> componentDidMount)
+-> batching render phases of all child class components and then the commit phases are done as DOM manipulation is too expensive
