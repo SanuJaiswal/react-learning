@@ -2,9 +2,10 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import { Shimmer } from "./Shimmer";
 import { Link } from "react-router-dom";
+import useRestaurantData from "../utils/useRestaurantData";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
-  const [originalData, setOriginalData] = useState([]);
   const [filteredListOfRestaurants, setFilteredListOfRestaurants] = useState(
     []
   );
@@ -12,41 +13,14 @@ const Body = () => {
   const [filterButtonText, setFilterButtonText] = useState(
     "Show Top Rated Restaurants"
   );
-  const [loading, setLoading] = useState(true);
+
   const [searchTerm, setSearchTerm] = useState("");
 
-  const debounce = (fn, delay) => {
-    let timerId;
-    return function (...args) {
-      if (timerId) {
-        clearTimeout(timerId);
-      }
-      timerId = setTimeout(() => {
-        fn(...args);
-      }, delay);
-    };
-  };
+  const { loading, originalData } = useRestaurantData();
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-      );
-      const jsonData = await response.json();
-      console.log(jsonData);
-      setOriginalData(
-        jsonData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants
-      );
-      setFilteredListOfRestaurants(
-        jsonData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants
-      );
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+  useEffect(() => {
+    setFilteredListOfRestaurants(originalData);
+  }, [originalData]);
 
   const handleFilterClick = () => {
     try {
@@ -69,28 +43,46 @@ const Body = () => {
     }
   };
 
-  const handleSearch = () => {
+  const debounce = (fn, delay) => {
+    let timerId;
+    return function (...args) {
+      if (timerId) {
+        clearTimeout(timerId);
+      }
+      timerId = setTimeout(() => {
+        fn(...args);
+      }, delay);
+    };
+  };
+
+  const handleSearch = (searchTerm) => {
     const searchedRestaurant = originalData.filter((res) =>
       res.info.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredListOfRestaurants(searchedRestaurant);
   };
 
-  const debouncedSearch = debounce(handleSearch, 800);
+  const debouncedSearch = debounce(handleSearch, 200);
 
   const handleInputSearch = (event) => {
     const searchTermValue = event.target.value;
     setSearchTerm(searchTermValue);
-    if (!searchTermValue) {
-      setFilteredListOfRestaurants(originalData);
-    } else {
-      debouncedSearch(searchTermValue);
-    }
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (searchTerm) debouncedSearch(searchTerm);
+    else setFilteredListOfRestaurants(originalData);
+  }, [originalData, searchTerm]);
+
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false)
+    return (
+      <div className="status-container">
+        <h1 className="status-text">
+          <span className="oops">OOPS!</span> It seems you are offline 📴
+        </h1>
+      </div>
+    );
 
   return (
     <div className="body">

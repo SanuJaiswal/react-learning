@@ -16,6 +16,18 @@ body {
   height: 100%;
 }
 
+.status-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.oops {
+  font-weight: 900;
+  color: red;
+}
+
 /* Header Section */
 
 .header {
@@ -63,7 +75,6 @@ body {
 .options {
   display: flex;
   gap: 5vw;
-  margin-bottom: 7vw;
 }
 
 #searchBox {
@@ -105,6 +116,7 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   gap: 8vw 3vw;
+  padding: 4vw;
 }
 
 .res-card,

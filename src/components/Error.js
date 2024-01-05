@@ -10,7 +10,6 @@ const Error = () => {
         title="Hungry Hunters"
         src={logo}
         alt="Hungry Hunters"
-        onClick={() => window.location.reload()}
       />
       <div className="err-details">
         <h4>
