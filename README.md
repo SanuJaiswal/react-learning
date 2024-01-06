@@ -67,3 +67,7 @@ useEffect to make API calls --> componentDidUpdate()
 In Class Component
 -> render phase(constructor -> render) then commit phase (DOM updation -> componentDidMount)
 -> batching render phases of all child class components and then the commit phases are done as DOM manipulation is too expensive
+
+**Parcel** ---> Chunking, dynamic bundling, code splitting, on-demand loading, lazy loading- to break down the app into smaller logical chunks
+
+--> By loading that page when user navigates to that page

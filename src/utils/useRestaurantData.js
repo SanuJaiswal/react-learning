@@ -4,13 +4,13 @@ const useRestaurantData = () => {
   const [originalData, setOriginalData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
+  const fetchData = async (latitude, longitude) => {
     try {
       const response = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+        `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${latitude}&lng=${longitude}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
       );
       const jsonData = await response.json();
-      console.log(jsonData);
+
       setOriginalData(
         jsonData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
@@ -22,7 +22,22 @@ const useRestaurantData = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          fetchData(latitude, longitude);
+        },
+        (error) => {
+          console.error("Error getting your location:", error.message);
+          alert(
+            "Please allow access of your location to get the restaurants near you"
+          );
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser");
+    }
   }, []);
 
   return { loading, originalData };
