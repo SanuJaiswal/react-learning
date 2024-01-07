@@ -23,11 +23,11 @@ const Header = () => {
 
   const onlineStatus = useOnlineStatus();
   return (
-    <div className="header">
-      <div className="logo-container">
+    <div className="flex justify-between">
+      <div className="pl-10 pt-4">
         <Link to="/">
           <img
-            className="logo"
+            className="w-20 cursor-pointer"
             title="Hungry Hunters"
             src={logo}
             alt="Hungry Hunters"
@@ -35,19 +35,24 @@ const Header = () => {
         </Link>
       </div>
       <div className="nav-container">
-        <ul>
-          <li>Online Status: {onlineStatus ? "🟢" : "🔴"}</li>
-          <li>
+        <ul className="flex">
+          <li className="pr-20 pt-8 cursor-pointer">
+            Online Status: {onlineStatus ? "🟢" : "🔴"}
+          </li>
+          <li className="pr-20 pt-8 cursor-pointer hover:text-eca854">
             <Link to="/home">Home</Link>
           </li>
-          <li>
+          <li className="pr-20 pt-8 cursor-pointer hover:text-eca854">
             <Link to="/about">About</Link>
           </li>
-          <li>
+          <li className="pr-20 pt-8 cursor-pointer hover:text-eca854">
             <Link to="/contact">Contact</Link>
           </li>
-          <li>Cart</li>
-          <li className="login" onClick={handleLoginClick}>
+          <li className="pr-20 pt-8 cursor-pointer hover:text-eca854">Cart</li>
+          <li
+            className="pr-20 pt-8 cursor-pointer hover:text-eca854"
+            onClick={handleLoginClick}
+          >
             {logInText}
           </li>
         </ul>

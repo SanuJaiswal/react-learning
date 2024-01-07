@@ -13,9 +13,7 @@ const Body = () => {
   const [filterButtonText, setFilterButtonText] = useState(
     "Show Top Rated Restaurants"
   );
-
   const [searchTerm, setSearchTerm] = useState("");
-
   const { loading, originalData } = useRestaurantData();
 
   useEffect(() => {
@@ -25,11 +23,9 @@ const Body = () => {
   const handleFilterClick = () => {
     try {
       if (isFiltered) {
-        // If already filtered, reset to the original data
         setFilteredListOfRestaurants(originalData);
         setFilterButtonText("Show Top Rated Restaurants");
       } else {
-        // If not filtered, filter the data
         const filteredResList = originalData.filter(
           (res) => res.info.avgRating > 4
         );
@@ -77,19 +73,22 @@ const Body = () => {
   const onlineStatus = useOnlineStatus();
   if (onlineStatus === false)
     return (
-      <div className="status-container">
-        <h1 className="status-text">
-          <span className="oops">OOPS!</span> It seems you are offline 📴
+      <div className="flex justify-center items-center h-screen">
+        <h1 className="text-2xl">
+          <span className="text-red-600 font-extrabold">OOPS!</span> Seems you
+          are offline 📴
         </h1>
       </div>
     );
 
   return (
-    <div className="body">
-      <div className="options">
+    <div className="mt-4 p-8 bg-gray-200">
+      <div className="flex gap-20">
         <div className="search">
           <input
             type="text"
+            className="w-96 py-2 outline-none border-b border-gray-300 bg-transparent transition-shadow duration-300 focus:shadow-outline-color-custom"
+            // className="w-96 p-2 outline-none border-b border-solid border-gray-300 bg-transaprent transition-shadow duration-300 focus:shadow-outline-color-custom"
             id="searchBox"
             placeholder={" Search your taste..."}
             value={searchTerm}
@@ -99,14 +98,14 @@ const Body = () => {
         <div className="filter">
           <button
             onClick={handleFilterClick}
-            className="filter-btn"
+            className="text-black cursor-pointer p-2 text-base border-2 border-solid border-gray-300 rounded hover:bg-eca854 hover:text-white disabled:opacity-70 disabled:cursor-not-allowed"
             disabled={loading}
           >
             {filterButtonText}
           </button>
         </div>
       </div>
-      <div className="res-container">
+      <div className="flex justify-center flex-wrap gap-y-32 gap-x-12 p-16">
         {loading ? (
           <Shimmer />
         ) : (

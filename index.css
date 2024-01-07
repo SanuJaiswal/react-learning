@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
@@ -7,178 +11,11 @@
 
 *::selection {
   color: #fff;
-  background-color: #f7d65a;
+  background-color: #eca854;
 }
 
 html,
 body {
   width: 100%;
   height: 100%;
-}
-
-.status-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-}
-
-.oops {
-  font-weight: 900;
-  color: red;
-}
-
-/* Header Section */
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.logo-container {
-  padding-left: 10vw;
-  padding-top: 1vw;
-}
-
-.logo {
-  width: 5vw;
-  cursor: pointer;
-}
-
-.nav-container > ul {
-  display: flex;
-}
-
-.nav-container li {
-  padding-right: 5vw;
-  padding-top: 2vw;
-  font-size: 1.1vw;
-  list-style-type: none;
-  cursor: pointer;
-}
-
-.nav-container li:hover {
-  color: #eca854;
-}
-
-/* Body Section */
-
-.body {
-  row-gap: 5vw;
-  width: 100%;
-  margin-top: 1vw;
-  padding: 2vw;
-  background-color: rgb(241, 241, 241);
-}
-
-.options {
-  display: flex;
-  gap: 5vw;
-}
-
-#searchBox {
-  width: 30vw;
-  padding: 0.6vw;
-  border: none;
-  outline: none;
-  border-bottom: 0.1vw solid #ccc;
-  background-color: transparent;
-  transition: box-shadow 0.3s ease;
-}
-
-#searchBox:focus {
-  box-shadow: 0 2px #eca854;
-}
-
-.filter-btn {
-  color: black;
-  cursor: pointer;
-  border: 0.1vw solid #ccc;
-  border-radius: 0.2vw;
-  padding: 0.6vw;
-  font-size: 1.1vw;
-}
-
-.filter-btn:hover {
-  background-color: #eca854;
-  color: #fff;
-}
-
-.filter-btn:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-.res-container,
-.shimmer-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8vw 3vw;
-  padding: 4vw;
-}
-
-.res-card,
-.shimmer-card {
-  height: 16rem;
-  width: 18rem;
-  transition: all 0.05s ease 0s;
-}
-
-.res-card:hover {
-  cursor: pointer;
-  transform: scale(0.95);
-}
-
-.res-img,
-.shimmer-img {
-  height: 80%;
-  width: 100%;
-  border-radius: 1vw;
-  overflow: hidden;
-}
-
-.res-img > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.res-details,
-.shimmer-details {
-  margin: 1vw 0 0 1.5vw;
-  line-height: 1.5;
-}
-
-.res-details .cuisines {
-  color: rgba(2, 6, 12, 0.6);
-}
-
-/* Shimmer */
-.shimmer-card {
-  background: #f5f5f5;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.shimmer-img {
-  background: linear-gradient(-90deg, #eee 25%, #ddd 50%, #eee 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-}
-
-.shimmer-details {
-  height: 20px;
-  width: 80%;
-  background: linear-gradient(-90deg, #eee 25%, #ddd 50%, #eee 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-}
-
-@keyframes shimmer {
-  to {
-    background-position: 200% 0;
-  }
 }
