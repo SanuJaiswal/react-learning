@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+// tailwind.config.js
+
 module.exports = {
-  mode: "jit",
   content: ["./src/**/*.{html,js}"],
   theme: {
     extend: {
@@ -12,26 +13,28 @@ module.exports = {
       boxShadow: {
         "outline-color-custom": "0 2px #eca854",
       },
+      // keyframes: {
+      //   shimmer: {
+      //     "100%": {
+      //       backgroundPosition: "200% 0",
+      //     },
+      //   },
+      // },
+      // animation: {
+      //   shimmer: "shimmer 1.5s infinite",
+      // },
     },
   },
   plugins: [
-    function ({ addUtilities }) {
-      const newUtilities = {
-        ".shimmer-img": {
-          background: "linear-gradient(-90deg, #eee 25%, #ddd 50%, #eee 75%)",
-          "background-size": "200% 100%",
-          animation: "shimmer 1.5s infinite",
-        },
-        ".shimmer-details": {
-          height: "20px",
-          width: "80%",
-          background: "linear-gradient(-90deg, #eee 25%, #ddd 50%, #eee 75%)",
-          "background-size": "200% 100%",
-          animation: "shimmer 1.5s infinite",
-        },
-      };
-
-      addUtilities(newUtilities, ["responsive", "hover"]);
-    },
+    // function ({ addUtilities }) {
+    //   const newUtilities = {
+    //     ".shimmer-effect": {
+    //       background: "linear-gradient(90deg, #eee 25%, #ddd 50%, #eee 75%)",
+    //       "background-size": "200% 100%",
+    //       animation: "shimmer",
+    //     },
+    //   };
+    //   addUtilities(newUtilities, ["responsive", "hover"]);
+    // },
   ],
 };

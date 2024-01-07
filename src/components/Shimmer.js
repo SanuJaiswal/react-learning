@@ -6,8 +6,8 @@ export const Shimmer = () => {
           key={index}
           className="h-64 w-72 transition-transform duration-50 ease-in-out bg-f5f5f5 rounded-md overflow-hidden shadow-md"
         >
-          <div className="h-52 w-full rounded-lg overflow-hidden shimmer-img"></div>
-          <div className="h-5 w-4/5 mt-4 ml-4 shimmer-details"></div>
+          <div className="h-52 w-full rounded-lg overflow-hidden shimmer-effect"></div>
+          <div className="h-5 w-4/5 mt-4 ml-4 shimmer-effect"></div>
         </div>
       ))}
     </div>
